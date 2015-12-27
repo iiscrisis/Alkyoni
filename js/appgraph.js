@@ -22,7 +22,7 @@ function appGraph(id,initialData)
   {
     alert("START INITIALIZE GRAPH");
     this.layout =   this.setLayout();
-      alert("LAYOUT SET");
+      alert("LAYOUT SET 2");
     this.container.attr("id",this.id);
     alert(JSON.stringify(this.initialData));
     //this.plotly_obj =  Plotly.newPlot(this.container, this.initialData,this.layout);
