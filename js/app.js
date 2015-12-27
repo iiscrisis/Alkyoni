@@ -210,12 +210,12 @@ app={
 
     setPage :function(page_container)
     {
-
+			alert("Container "+page_container.attr('id'));
       $("#app_pages").find(".app_page").appendTo("#repository");
       $("#app_pages").append(page_container);
 
 			window.scrollTo(0,0);
-
+			ert("setPage DONE" );
     },
 
     /**
