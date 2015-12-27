@@ -109,7 +109,7 @@ app={
 		geoLocationError:function(error)
 		{
 			//this.sendMessage("Error "+error.code+"\n"+error.message+'\n');
-			alert("Geoloc error");
+			alert("Geolocation is off.");
 
 
 		},
@@ -278,19 +278,19 @@ app={
 
 
 
-				 alert("New kid");
+			//	 alert("New kid");
 				 var appLeaf = new AppKid(app.appDb,template_id,h_id);
-				 alert(" kid created");
+			//	 alert(" kid created");
 				 this.occupied_ids[this.occupied_indexes] = appLeaf;
 
 				 this.setCurrentView(appLeaf);
-				  alert(" kid view set");
+			//	  alert(" kid view set");
 				 app.setPage(appLeaf.container);
-				   alert(" kid page set");
+				//   alert(" kid page set");
 				 this.occupied_indexes++;
 
 			 }else {
-				 	alert("Kid exists");
+//alert("Kid exists");
 			 		 this.setCurrentView(this.getObjectbyId(h_id));
 			 		 app.setPage($("#kid_"+h_id));
 

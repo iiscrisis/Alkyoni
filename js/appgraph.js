@@ -20,11 +20,11 @@ function appGraph(id,initialData)
 
   this.initialize = function()
   {
-    alert("START INITIALIZE GRAPH");
+  //  alert("START INITIALIZE GRAPH");
     this.layout =   this.setLayout();
-      alert("LAYOUT SET 2");
+    //  alert("LAYOUT SET 2");
     this.container.attr("id",this.id);
-    alert(JSON.stringify(this.initialData));
+  //  alert(JSON.stringify(this.initialData));
     //this.plotly_obj =  Plotly.newPlot(this.container, this.initialData,this.layout);
 
 
@@ -32,7 +32,7 @@ function appGraph(id,initialData)
 
   this.setLayout = function()
   {
-    alert("start setting layout");
+  //  alert("start setting layout");
     var self = this;
     var layout = {
       title:self.title,
@@ -47,7 +47,7 @@ function appGraph(id,initialData)
 
     };
 
-    alert("End setting layout");
+    //alert("End setting layout");
 
     return layout;
 
