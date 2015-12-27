@@ -210,12 +210,12 @@ app={
 
     setPage :function(page_container)
     {
-			alert("Container "+page_container.attr('id'));
+
       $("#app_pages").find(".app_page").appendTo("#repository");
       $("#app_pages").append(page_container);
 
 			window.scrollTo(0,0);
-			ert("setPage DONE" );
+
     },
 
     /**
@@ -278,7 +278,7 @@ app={
 
 
 
-				 //alert("New kid");
+				 alert("New kid");
 				 var appLeaf = new AppKid(app.appDb,template_id,h_id);
 				 this.occupied_ids[this.occupied_indexes] = appLeaf;
 
@@ -287,7 +287,7 @@ app={
 				 this.occupied_indexes++;
 
 			 }else {
-			//	 alert("New exists");
+				 	alert("Kid exists");
 			 		 this.setCurrentView(this.getObjectbyId(h_id));
 			 		 app.setPage($("#kid_"+h_id));
 
