@@ -2,7 +2,7 @@ function appGraph(id,initialData)
 {
 
 
-  this.id;
+  this.id=id;
 
   this.container=$("<div/>");
   this.plotly_obj;
@@ -20,13 +20,10 @@ function appGraph(id,initialData)
 
   this.initialize = function()
   {
+    alert("START INITIALIZE GRAPH");
     this.layout =   this.setLayout();
-
-
-  //  var data = this.initialData;
-
+      alert("LAYOUT SET");
     this.container.attr("id",this.id);
-
     alert(JSON.stringify(this.initialData));
     //this.plotly_obj =  Plotly.newPlot(this.container, this.initialData,this.layout);
 
