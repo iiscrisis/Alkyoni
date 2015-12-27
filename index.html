@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, target-densitydpi=device-dpi, user-scalable=0">-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
+<link rel="stylesheet" href="lib/jquery.mobile-1.4.5.min.css" />
+
+<link rel="stylesheet" href="css/typo.css" />
+<link rel="stylesheet" href="css/themes.css" />
+<link rel="stylesheet" href="css/alkyoni.css" />
+
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100italic,300italic,400italic,500italic,700italic,900italic' rel='stylesheet' type='text/css'>
+
+<title>Page Title</title>
+
+
+
+
+<!--  irst Page always on the system -->
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="lib/painlessfs.js"></script>
+
+<script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="lib/jquery.mobile-1.4.5.min.js"></script>
+
+<script type="text/javascript" src="lib/pouchdb-3.3.1.min.js"></script>
+<script type="text/javascript" src="lib/handlebars-v3.0.0.js"></script>
+<script type="text/javascript" src="lib/plotly-latest.min.js"></script>
+
+
+<script type="text/javascript" src="lib/TimelineMax.min.js"></script>
+<script type="text/javascript" src="lib/TweenMax.min.js"></script>
+<script type="text/javascript" src="lib/plotly-latest.min.js"></script>
+
+<script type="text/javascript" src="js/general_functions.js"></script>
+
+<script type="text/javascript" src="js/AppMemory.js"></script>
+
+
+
+
+<script type="text/javascript" src="js/appGraph.js"></script>
+<script type="text/javascript" src="js/AppKid.js"></script>
+<script type="text/javascript" src="js/appMaps.js"></script>
+<script type="text/javascript" src="js/AppLeaf.js"></script>
+<script type="text/javascript" src="js/homeview.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+</head>
+
+<body class="theme0 "  onload="onLoad()">
+
+  <div role="main" class="ui-content   fullscreen_mode">
+
+    <div id="app_header">
+
+    </div>
+
+
+      <div id="app_pages">
+
+      </div>
+
+
+
+
+       <div id="app_footer" class="tween_intro text-center">
+
+                <img class="footer_top" src="images/footer/iyplogo.svg"/>
+
+                <br/>
+                <img class="footer_bot" src="images/footer/footer.png"/>
+
+       </div>
+
+
+  </div>
+
+<!-- Map Box -->
+<div id="repository">
+	<div id="map_box"></div>
+  <div id="graph_box">
+
+  </div>
+</div>
+
+
+  <script id="kids_page" type="text/x-handlebars-template">
+
+    <div id="front_calendar">
+      <h3>Ημερολογιο</h3>
+    </div>
+
+    <div id="front_development">
+      <h3>Ανάπτυξη Παιδιού</h3>
+    </div>
+
+  </script>
+
+	<script id="front_page_app" type="text/x-handlebars-template">
+    <div class="logo text-center">
+      <img src="images/logo/logo_alkyoni.png" />
+    </div>
+    <div id="front_kids_container" class="dark_on_light">
+
+        <div id="kids_list">
+
+        </div>
+
+        <div id="kids_add" class="text-center">
+
+            <img class="kids_add_img" src="images/app/addkid.png">
+        </div>
+    </div>
+
+    <div id="fron_actions" class="dark_on_light text-center">
+
+
+
+      <div id="front_spots" class="menu_item">
+        <a href="#plugin?id:spots&template_id:spots_template&plugin_type:map" data-role="button" class="text-button">
+          <img src="images/app/spots.png"/>
+          <br/>
+          Φιλικά στον Θηλασμό Σημεία
+        </a>
+
+      </div>
+
+
+      <div id="front_directions" class="menu_item">
+        <a href="#vieLeaf?id:directions&template_id:directions_template" data-role="button" class="text-button">
+          <img src="images/app/directions.png"/>
+          <br/>
+          Οδηγίες Σωστού Θηλασμού
+        </a>
+
+      </div>
+
+
+      <div id="front_about" class="menu_item">
+        <a href="#vieLeaf?id:about&template_id:about_template" data-role="button" class="text-button">
+          <img src="images/app/about.png"/>
+          <br/>
+          Ποιοί Είμαστε
+        </a>
+
+      </div>
+
+    </div>
+
+
+
+	</script>
+
+  <script id="directions_template" type="text/x-handlebars-template">
+
+    <div class="kid_top_actions">
+      <div class="home_btn">
+            <img src="images/app/home.png" />  home
+      </div>
+
+
+
+    </div>
+
+
+    <div class="pages_title">
+        <img class="spots_pages" src="images/app/directions.png"/>   ΟΔΗΙΓΙΕΣ ΣΩΣΤΟΥ ΘΗΛΑΣΜΟΥ</h1>
+    </div>
+  </script>
+
+  <script id="spots_template" type="text/x-handlebars-template">
+    <div class="kid_top_actions">
+      <div class="home_btn">
+            <img src="images/app/home.png" />  home
+      </div>
+
+
+
+    </div>
+
+
+    <div class="pages_title">
+        <img class="spots_pages" src="images/app/spots.png"/> ΦΙΛΙΚΑ ΣΤΟΝ ΘΗΛΑΣΜΟ ΣΗΜΕΙΑ</h1>
+    </div>
+
+  </script>
+
+
+
+
+<script id="about_template" type="text/x-handlebars-template">
+  <div class="kid_top_actions">
+    <div class="home_btn">
+          <img src="images/app/home.png" />  home
+    </div>
+
+
+
+  </div>
+
+
+  <div class="pages_title">
+      <img class="spots_pages" src="images/app/about.png"/> ΠΟΙΟΙ ΕΙΜΑΣΤΕ</h1>
+  </div>
+</script>
+
+<!-- Kids List -->
+<script  id="kids_list_template" type="text/x-handlebars-template">
+
+
+{{#if kids}}
+
+  {{#each kids}}
+
+    <div class="single_kid text-center">
+
+        <h1><a href="#kid?id:{{kids_id}}&template_id:single_kid_template" class="dark_on_light">{{kids_name}}</a></h1>
+
+      <img src="images/app/{{kids_image}}.png" />
+
+
+      <div class="actions"  data-kid_id="{{kids_id}}">
+        <div class="kid_delete text-center">
+          <img src="images/app/delete-03.svg"/>
+        </div>
+      </div>
+
+
+
+    </div>
+
+  {{/each}}
+
+{{/if}}
+</script>
+
+<script id="kid_forms_radio" type="text/x-handlebars-template">
+
+
+      <div class="form_button add_kid_field_button">
+        <img src="images/app/add-03.svg"/>
+      </div>
+
+      <div class="form_button cancel_kid_field_button">
+        <img src="images/app/delete-03.svg"/>
+      </div>
+
+    <div class="child_form_entry sex_form" data-parent_id="{{id}}">
+
+      <img src="images/app/sex-03.svg" />
+
+      <input type="radio" name="sex" value="male" class="radio_buttons">Αγόρι</input>
+
+      <input type="radio" name="sex" value="female" class="radio_buttons">Κορίτσι</input>
+
+
+
+    </div>
+
+</script>
+
+<script id="kid_forms_text" type="text/x-handlebars-template">
+
+
+  <div class="form_button add_kid_field_button">
+  <img src="images/app/add-03.svg"/>
+  </div>
+  <div class="form_button cancel_kid_field_button">
+  <img src="images/app/delete-03.svg"/>
+  </div>
+
+    <div class="child_form_entry" data-parent_id="{{id}}">
+      {{#if entry}}
+      <input type="text" name="day" placeholder="{{entry}}" size="12" />
+      {{else}}
+      <input type="text" name="day" placeholder="HM" size="12" />
+      {{/if}}
+    </div>
+
+
+
+</script>
+
+<script id="kid_forms_date" type="text/x-handlebars-template">
+
+    <div class="form_button add_kid_field_button">
+      <img src="images/app/add-03.svg"/>
+    </div>
+    <div class="form_button cancel_kid_field_button">
+      <img src="images/app/delete-03.svg"/>
+    </div>
+
+    <div class="child_form_entry" data-parent_id="{{id}}">
+
+      <input type="text" name="day" placeholder="HM" size="2" class="date_input">
+
+      <input type="text" name="month" placeholder="MH" size="2" class="date_input">
+
+      <input type="text" name="year" placeholder="XΡ" size="2" class="date_input">
+
+    </div>
+
+
+
+</script>
+
+<script id="single_kid_template" type="text/x-handlebars-template">
+
+              <div class="kid_top_actions">
+                <div class="home_btn">
+                      <img src="images/app/home.png" />  home
+                </div>
+
+                <div class="edit_kid">
+                  <img src="images/app/edit.png" /> <span>edit</span>
+                </div>
+
+              </div>
+
+
+            <div class="kids_details not_editing text-center">
+
+            <div class="kid_data_entry name " data-parent_id="{{_id}}" data-input_type="text" data-input_field="name" data-input_value="{{name}}">
+
+                  <img src="images/app/{{kids_image}}.png" />
+
+                  <h1>
+                    {{name}}
+                  </h1>
+
+
+
+                  {{#if name}}
+                  <div class="edit_kid_value">
+                    edit
+                  </div>
+                  {{else}}
+                  <div class="add_kid_value">
+                    add
+                  </div>
+                  {{/if}}
+
+            </div>
+
+
+              <div class="kid_data_entry sex " data-parent_id="{{_id}}" data-input_type="radio" data-input_field="sex"  data-input_value="{{sex}}">
+                  <h3>Φύλλο</h3>
+                  <div class="kid_data_entry_value">
+                    {{sex}}
+                  </div>
+
+                {{#if sex}}
+                <div class="edit_kid_value">
+                  edit
+                </div>
+                {{else}}
+                <div class="add_kid_value">
+                  add
+                </div>
+                {{/if}}
+              </div>
+
+
+
+              <div class="kid_data_entry birthdate " data-parent_id="{{_id}}" data-input_type="date" data-input_field="birthdate"  data-input_value="{{birthdate}}">
+                <h3>Ημερομηνία Γέννησης</h3>
+                  <div class="kid_data_entry_value">{{birthdate}}  </div>
+
+                {{#if birthdate}}
+                <div class="edit_kid_value">
+                  edit
+                </div>
+                {{else}}
+                <div class="add_kid_value">
+                  add
+                </div>
+                {{/if}}
+              </div>
+
+
+
+              <div class="kid_data_entry birthweight " data-parent_id="{{_id}}" data-input_type="text" data-input_field="birthweight"  data-input_value="{{birthweight}}">
+                <h3>βάρος στη γέννηση</h3>
+                  <div class="kid_data_entry_value">{{birthweight}}  </div>
+
+                {{#if birthweight}}
+                <div class="edit_kid_value">
+                  edit
+                </div>
+                {{else}}
+                <div class="add_kid_value">
+                  add
+                </div>
+                {{/if}}
+              </div>
+
+
+
+              <div class="kid_data_entry birthheight " data-parent_id="{{_id}}" data-input_type="text" data-input_field="birthheight"  data-input_value="{{birthheight}}">
+                <h3>ύψος στη γέννηση</h3>
+                  <div class="kid_data_entry_value">{{birthheight}}  </div>
+
+                {{#if birthheight}}
+                <div class="edit_kid_value">
+                  edit
+                </div>
+                {{else}}
+                <div class="add_kid_value">
+                  add
+                </div>
+                {{/if}}
+              </div>
+
+
+
+              <div class="kid_data_entry first_word" data-parent_id="{{_id}}" data-input_type="text" data-input_field="first_word"  data-input_value="{{first_word}}">
+                <h3>η πρώτη λεξούλα</h3>
+                  <div class="kid_data_entry_value">{{first_word}}  </div>
+
+                {{#if first_word}}
+                <div class="edit_kid_value">
+                  edit
+                </div>
+                {{else}}
+                <div class="add_kid_value">
+                  add
+                </div>
+                {{/if}}
+              </div>
+
+
+
+
+              <div class="kid_data_entry firststride" data-parent_id="{{_id}}" data-input_type="date" data-input_field="firststride"  data-input_value="{{firststride}}">
+                <h3>πότε μπουσούλισε</h3>
+                  <div class="kid_data_entry_value">{{firststride}}  </div>
+
+                {{#if firststride}}
+                <div class="edit_kid_value">
+                  edit
+                </div>
+                {{else}}
+                <div class="add_kid_value">
+                  add
+                </div>
+                {{/if}}
+              </div>
+
+
+
+              <div class="kid_data_entry firstlaugh" data-parent_id="{{_id}}" data-input_type="date" data-input_field="firstlaugh"  data-input_value="{{firstlaugh}}">
+                <h3>πότε γέλασε</h3>
+                  <div class="kid_data_entry_value">{{firstlaugh}}  </div>
+
+                {{#if firstlaugh}}
+                <div class="edit_kid_value">
+                  edit
+                </div>
+                {{else}}
+                <div class="add_kid_value">
+                  add
+                </div>
+                {{/if}}
+              </div>
+
+
+
+              <div class="kid_data_entry firstwalk" data-parent_id="{{_id}}" data-input_type="date" data-input_field="firstwalk"  data-input_value="{{firstwalk}}">
+                <h3>πότε περπάτησε</h3>
+                <div class="kid_data_entry_value">  {{firstwalk}}
+                </div>
+                {{#if firstwalk}}
+                <div class="edit_kid_value">
+                  edit
+                </div>
+                {{else}}
+                <div class="add_kid_value">
+                  add
+                </div>
+                {{/if}}
+
+
+              </div>
+
+
+  </div>
+
+  <div class="kids_development">
+
+    <div class="add_latest_reading">
+
+      <div class="add_reading_title text-center">
+        <img src="images/app/addmeasure.png"/>
+      </div>
+
+      <div class="latest_reading_form text-center hidden">
+
+        <div class="child_form_entry latest_date" data-parent_id="{{id}}">
+          <h3>Ημερομηνία</h3>
+          <input type="text" name="day" placeholder="HM" size="2" class="date_input">
+
+          <input type="text" name="month" placeholder="MH" size="2" class="date_input">
+
+          <input type="text" name="year" placeholder="XΡ" size="2" class="date_input">
+
+        </div>
+
+        <div class="child_form_entry latest_weight" data-parent_id="{{id}}">
+          <h3>Βάρος</h3>
+          <input type="text" name="current_height" placeholder="π.χ 2500" size="2" >γραμμάρια.
+
+        </div>
+
+        <div class="child_form_entry latest_height" data-parent_id="{{id}}">
+          <h3>Ύψος</h3>
+          <input type="text" name="current_height" placeholder="π.χ 85" size="2" >εκατοστά
+
+        </div>
+
+        <div class="form_button add_reading_button">
+          <img src="images/app/add-03.svg"/>Προσθήκη
+        </div>
+
+      </div>
+    </div>
+
+    <div class="development_calendar text-center">
+
+
+
+      <h1>  <img class="calendar_image" src="images/app/calendar.png"/> Ημερολογιο Ανάπτυξης</h1>
+
+      {{#each calendar}}
+        <div class="single_calendar_entry text-center">
+          <div class="date_entry calendar_entry" data-value= {{entry_date}}>
+            {{entry_date}}
+          </div>
+
+          <div class="weight_entry calendar_entry" data-value= {{entry_weight}}>
+            {{entry_weight}} γρ.
+
+          </div>
+
+          <div class="height_entry calendar_entry" data-value= {{entry_height}}>
+            {{entry_height}} εκ.
+
+          </div>
+
+          <div class="curves_button"  data-entry_index={{entry_index}}  data-curve_type="height">
+            <img src="images/app/curves.png" />
+            <br/>
+            καμπύλες
+          </div>
+
+
+          <div class="entry_delete" data-entry_id={{entry_id}}>
+
+              <img src="images/app/delete-03.svg"/>
+
+          </div>
+
+          <div class="curve_data">
+
+
+
+            <div class="curves_container">
+
+            </div>
+          </div>
+
+        </div>
+
+
+      {{/each}}
+      <div class="">
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+</script>
+<!-- Add child form -->
+<script id="add_child_template" type="text/x-handlebars-template">
+
+  <div class="add_child_form">
+    <div class="child_form_entry">
+      <input type="text" name="baby_name" placeholder="Ονομα Παιδιου"/>
+    </div>
+
+    <div class="child_form_entry sex_form">
+
+      <img src="images/app/sex-03.svg" />
+      <input type="radio" name="sex" value="male" class="radio_buttons">Αγόρι</input>
+
+      <input type="radio" name="sex" value="female" class="radio_buttons">Κορίτσι</input>
+
+    </div>
+
+    <div class="form_button add_kid_button">
+      <img src="images/app/add-03.svg"/>Προσθήκη
+    </div>
+
+  </div>
+
+</script>
+
+ <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDY4mWiTwof0gYR1K7GlZ6NwX-ToIkKf0E&sensor=false"> </script>-->
+
+
+
+
+
+
+</body>
+</html>
