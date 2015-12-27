@@ -34,13 +34,17 @@ function AppKid(Memory,template_id,id){
 
 		this.initialize = function()
 		{
+
+			alert("initializing start");
+
 			this.container.addClass("app_page")
 			this.container.attr("id","kid_"+this.id);
 		//	alert("1");//$("#front_page_app").html());
 			this.template = Handlebars.compile($("#"+this.template_id).html());
+			alert("Template set, setting context");
 			//Should Add a clean up of al nodes begore rerendering
 			this.setContext();
-
+			alert("initializing End ");
 
 			//console.log(this.appData);
 
@@ -50,7 +54,7 @@ function AppKid(Memory,template_id,id){
 		{
 		//	alert(JSON.stringify(this.appData));
 
-
+			alert("Kid REnder ");
 
 			app.clean_up();
 
@@ -76,7 +80,7 @@ function AppKid(Memory,template_id,id){
 				app.appDb.db.get(self.id).then(function(doc){
 
 				//	alert(JSON.stringify(doc));
-
+				alert("setContext Got data");
 					var image = "boy";
 
 					if(doc.sex=='female')
@@ -109,6 +113,7 @@ function AppKid(Memory,template_id,id){
 							attachments: true
 						}).then(function (result) {
 
+							alert("got entries");
 							self.calendar_array=[];
 							var index=0;
 							result.rows.forEach(function(row) {
@@ -137,9 +142,9 @@ function AppKid(Memory,template_id,id){
 									self.graph_data_height = girl_height_init;
 								}
 
-
+								alert("setting Graph");
 								self.graphHeight = new appGraph(self.id+"_graph_height",self.graph_data_height);
-
+							alert("Set contetx end");
 								self.render();
 
 						}).catch(function(error){

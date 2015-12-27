@@ -280,10 +280,13 @@ app={
 
 				 alert("New kid");
 				 var appLeaf = new AppKid(app.appDb,template_id,h_id);
+				 alert(" kid created");
 				 this.occupied_ids[this.occupied_indexes] = appLeaf;
 
 				 this.setCurrentView(appLeaf);
+				  alert(" kid view set");
 				 app.setPage(appLeaf.container);
+				   alert(" kid page set");
 				 this.occupied_indexes++;
 
 			 }else {
