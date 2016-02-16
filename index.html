@@ -781,20 +781,22 @@
 
       {{#each calendar}}
         <div class="single_calendar_entry text-center">
+
+
           <div class="date_entry calendar_entry" data-value= {{entry_date}}>
             {{entry_date}}
           </div>
 
           <div class="weight_entry calendar_entry" data-value= {{entry_weight}}>
             {{entry_weight}} γρ.
-
           </div>
 
           <div class="height_entry calendar_entry" data-value= {{entry_height}}>
             {{entry_height}} εκ.
+          </div>
+          <div class="seperator">
 
           </div>
-
           <div class="curves_button"  data-entry_index={{entry_index}}  data-curve_type="height">
             <img src="images/app/curves.png" />
             <br/>
@@ -807,12 +809,14 @@
             καμπύλες Βάρους
           </div>
 
+          <div class="entry_delete text-center" data-entry_id={{entry_id}}>
 
-          <div class="entry_delete" data-entry_id={{entry_id}}>
-
-              <img src="images/app/delete-03.svg"/>
+              <img src="images/app/delete-03.svg"/>Delete
 
           </div>
+
+
+
 
           <div class="curve_data">
 

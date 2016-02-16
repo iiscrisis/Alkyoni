@@ -510,7 +510,12 @@ top: 1px;
 	font-size:1.1em;
 	font-weight:400;
 	margin-top:10px;
+	margin-bottom:10px;
+}
 
+.single_calendar_entry .seperator
+{
+	margin:15px;
 }
 
 .single_calendar_entry  .weight_entry
