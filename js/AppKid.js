@@ -17,9 +17,10 @@ function AppKid(Memory,template_id,id){
 		this.firstlaugh;
 		this.firstwalk;
 
+		this.graph_data_weight;
 		this.graph_data_height;// = graph_data_height ; //contains title, data, plot axis titles
 		this.graphHeight; //appGraph object
-
+		this.graphWeight; //appGraph object
 
 		this.template; //Template object for handlenbar
 		this.appData=[];
@@ -138,12 +139,15 @@ function AppKid(Memory,template_id,id){
 								if(self.sex=="male")
 								{
 									self.graph_data_height = boys_height_init;
+									self.graph_data_weight = boys_weight_init;
 								}else {
 									self.graph_data_height = girl_height_init;
+									self.graph_data_weight = girl_weight_init;
 								}
 
 							//	alert("setting Graph");
 								self.graphHeight = new appGraph(self.id+"_graph_height",self.graph_data_height);
+								self.graphWeight = new appGraph(self.id+"_graph_weight",self.graph_data_weight);
 						//	alert("Set contetx end")
 								self.render();
 
@@ -476,6 +480,7 @@ function AppKid(Memory,template_id,id){
 						var self = app.current_object; //Get reference to parent Object from app
 
 						var value = $(this).closest(".single_calendar_entry").find(".height_entry").data("value");
+						var value_w = parseFloat($(this).closest(".single_calendar_entry").find(".weight_entry").data("value"))/1000;
 						var entry_date = $(this).closest(".single_calendar_entry").find(".date_entry").data("value");
 
 
@@ -483,7 +488,7 @@ function AppKid(Memory,template_id,id){
 					//	alert(reading_age);
 
 
-					var user_entry = [{
+					var user_entry_h = [{
 							x: [reading_age],
 							y: [value],
 							 mode: 'markers',
@@ -494,9 +499,28 @@ function AppKid(Memory,template_id,id){
 							name:'Υψος'
 						}];
 
+						var user_entry_w = [{
+								x: [reading_age],
+								y: [value_w],
+								 mode: 'markers',
+							 line: {
+								 color: 'rgb(234,0,0)',
+								 width: 1
+							 },
+								name:'Βάρος'
+							}];
+
 
 						console.log("Plotting for "+self.name );
-						self.graphHeight.display($(this).closest(".single_calendar_entry").find(".curves_container"),user_entry);
+						if($(this).data("curve_type") == "height")
+						{
+								console.log("Plotting Height");
+								self.graphHeight.display($(this).closest(".single_calendar_entry").find(".curves_container"),user_entry_h);
+						}else {
+								console.log("Plotting Weight");
+								self.graphWeight.display($(this).closest(".single_calendar_entry").find(".curves_container"),user_entry_w);
+						}
+
 
 
 					}

@@ -3,6 +3,7 @@ function appMaps(template_id,map_container,id)
 
   this.id = id;
 
+  this.map_markers = map_markers_array;
   this.container=$("<div/>");
   this.template_id = template_id;
   this.appData;
@@ -120,12 +121,12 @@ this.render = function()
            zoom: 17,
            mapTypeId: google.maps.MapTypeId.ROADMAP
        };
-       self.map = new google.maps.Map(document.getElementById(self.map_container), mapOptions);
-       var marker = new google.maps.Marker({
+    self.map = new google.maps.Map(document.getElementById(self.map_container), mapOptions);
+      /* var marker = new google.maps.Marker({
            position: myLatlng,
            map: self.map,
            title: "Athens Downtown"
-       });
+       });*/
 
        this.map_initialized = 1;
    }
@@ -147,11 +148,82 @@ this.render = function()
   this.initializeMap = function()
   {
      this.createMap(this.params);
+     this.initializeMarkers(this.map_markers);
   }
 
 
+ this.initializeMarkers = function(map_markers)
+ {
+
+   var self = this;
+
+   console.log("Map markers");
+   console.log(JSON.stringify(map_markers));
+   var counter = 0;
+   for(i=0; i<map_markers.length;i++)
+   {
+     console.log("LONGITUDE "+ map_markers[i]['LONGITUDE']);
+     if(map_markers[i]['LONGITUDE'] =="" || map_markers[i]['LATITUDE']=='')
+     {
+       continue;
+     }else {
+       counter++;
+       console.log(counter);
+     }
+
+     var store_longitude = self.calculateDegrees(map_markers[i]['LONGITUDE']);
+     var store_latitude = self.calculateDegrees(map_markers[i]['LATITUDE']);
+
+     console.log("LONGITUDE "+store_longitude+ " LATITUDE "+store_latitude);
+
+     var storemarkerPosition = new google.maps.LatLng(store_longitude,store_latitude);
+
+     var title = map_markers[i]['NAME'];
+
+     var address = '<div>'+map_markers[i]['ADDRESS']+'</div>';
+
+     var times = '<div>'+map_markers[i]['TIMES']+'</div>';
+     var change = '<div>CHANGING ROOM :'+ map_markers[i]['CHANGING ROOM']+'</div>';
+     var contentString = '<h2>'+title+'</h2>'+times+address+change;
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
 
 
+     var marker = new google.maps.Marker({
+         position: storemarkerPosition,
+         map: self.map,
+         title: title
+     });
+
+     marker.addListener('click', function() {
+        infowindow.open(self.map, marker);
+      });
+
+
+   }
+
+ }
+
+
+ this.calculateDegrees = function(position)
+ {
+   //35°20'14.7
+   var index_deg = position.indexOf('°');
+   var index_min = position.indexOf("'");
+   var index_direction = position.indexOf('\"');
+
+
+      var degs = parseFloat(position.substring(0, index_deg));
+      var mins = parseFloat(position.substring(index_deg+1, index_min))/60;
+      var secs = parseFloat(position.substring(index_min+1, index_direction))/3600;
+
+    //  console.log("DEGREES = "+ degs+" Minutes ="+ mins+ " Secs = "+secs)
+      var deg = degs + mins + secs;
+       console.log(deg);
+       return deg;
+    }
 
 
   this.setAppPosition=function(latitude, longitude)
@@ -160,14 +232,26 @@ this.render = function()
     self.lat = latitude;
     self.long = longitude;
 
-    console.log(latitude+","+ longitude);
+    console.log("LONG LAT "+latitude+","+ longitude);
     var appPosition = new google.maps.LatLng(self.lat, self.long);
+
+
+    var contentString = 'ΒΡΙΣΚΕΣΤΕ ΕΔΩ';
+
+     var infowindow = new google.maps.InfoWindow({
+       content: contentString
+     });
 
     var marker = new google.maps.Marker({
         position: appPosition,
         map: self.map,
-        title: "H τοποθεσία σου"
+        title: "ΒΡΙΣΚΕΣΤΕ ΕΔΩ",
+        icon:('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
     });
+    marker.addListener('click', function() {
+       infowindow.open(self.map, marker);
+     });
+
 
     self.map.setCenter(appPosition);
   }

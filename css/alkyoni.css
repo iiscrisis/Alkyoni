@@ -38,6 +38,23 @@ a
 	text-decoration:none;
 }
 
+.general_text{
+	font-size:1.4em;
+	line-height: 1.45em;
+}
+
+
+.faq h6
+{
+	margin-bottom: 0px;
+		font-size:1.1em;
+}
+.faq h2
+{
+	margin-bottom: 10px;
+		font-size:1.4em;
+}
+
 
 .terms_container p, .terms_container h4
 {
