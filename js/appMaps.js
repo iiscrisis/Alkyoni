@@ -14,6 +14,7 @@ function appMaps(template_id,map_container,id)
   this.googleMapsLoaded=false; //Set to true if googlemaps have been loaded
   this.map_initialized=0;
 
+
   this.params;
 
   this.interval_id;
@@ -160,6 +161,11 @@ this.render = function()
    console.log("Map markers");
    console.log(JSON.stringify(map_markers));
    var counter = 0;
+
+
+   var markers_array = new Array();
+   var infowindow= new Array();
+
    for(i=0; i<map_markers.length;i++)
    {
      console.log("LONGITUDE "+ map_markers[i]['LONGITUDE']);
@@ -178,31 +184,61 @@ this.render = function()
 
      var storemarkerPosition = new google.maps.LatLng(store_longitude,store_latitude);
 
+     console.log("MARKER " +JSON.stringify(map_markers[i]));
+
      var title = map_markers[i]['NAME'];
 
-     var address = '<div>'+map_markers[i]['ADDRESS']+'</div>';
+     var address ='';
 
-     var times = '<div>'+map_markers[i]['TIMES']+'</div>';
-     var change = '<div>CHANGING ROOM :'+ map_markers[i]['CHANGING ROOM']+'</div>';
+     if(map_markers[i]["Address"]!="")
+     {
+       address =   '<div>'+map_markers[i]['Address']+'</div>';
+     }
+
+
+
+     var times = '';
+
+     if(map_markers[i]["opening"]!="")
+     {
+       times = '<div>'+ map_markers[i]["opening"]+'</div>';
+     }
+
+
+     var change ="";
+     if(map_markers[i]["changingroom"]!="")
+     {
+       change = '<div>CHANGING ROOM :'+ map_markers[i]["changingroom"]+'</div>';
+     }
+
+
      var contentString = '<h2>'+title+'</h2>'+times+address+change;
 
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });
+     console.log(contentString);
 
-
-     var marker = new google.maps.Marker({
-         position: storemarkerPosition,
-         map: self.map,
-         title: title
-     });
-
-     marker.addListener('click', function() {
-        infowindow.open(self.map, marker);
-      });
+      self.createMarker(contentString, storemarkerPosition, title, self.map);
 
 
    }
+
+ }
+
+ this.createMarker = function(contentString, position, title, map)
+ {
+  var  infowindow= new google.maps.InfoWindow({
+     content: contentString
+   });
+
+
+   var markers_array= new google.maps.Marker({
+      position: position,
+      map: map,
+      title: title
+   });
+
+  markers_array.addListener('click', function() {
+     infowindow.open(map,  markers_array);
+   });
 
  }
 
